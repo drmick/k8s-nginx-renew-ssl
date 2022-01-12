@@ -1,0 +1,26 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: certs
+  namespace: default
+spec:
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      template:
+        metadata:
+          labels:
+            app: certs
+        spec:
+          containers:
+            - image: registry.example.net/certs:latest
+              imagePullPolicy: Always
+              name: renew
+              securityContext:
+                allowPrivilegeEscalation: false
+          restartPolicy: OnFailure
+          serviceAccountName: certs
+  schedule: "0 0 1 6 *"
+  successfulJobsHistoryLimit: 1

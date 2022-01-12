@@ -1,0 +1,15 @@
+---
+
+certificate_requests:
+  - dns_key: example.net
+    domain: example.net
+    namespaces:
+      - default
+    secret_name: example-net-nginx-certs
+    wildcard: true
+  - dns_key: example.net
+    domain: testing.example.net
+    namespaces:
+      - testing
+    secret_name: testing-example-net-nginx-certs
+    wildcard: true
